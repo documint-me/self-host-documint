@@ -73,8 +73,6 @@ REACT_APP_BASE_URL = <string>
 REACT_APP_RE_CAPTCHA_KEY = <string>
 ```
 
-
-
 ### Run
 After pulling you can run each image using the docker run command or with docker compose
 
@@ -134,5 +132,30 @@ volumes:
 ```
 
 
+## Resource allocation and deployment
+Currently documint deploys it's services to GCP's [cloud run](https://cloud.google.com/run/docs/overview/what-is-cloud-run). The process is pushing the images to the [artifact registry](https://cloud.google.com/artifact-registry/docs/overview) then selecting the image when deploying a cloud run service, adding the enviroment variables and allocating resources through GCP's online console. These are settings documint is using in production on GCP's cloud run.
 
-## Resource allocation recommendations
+### Documinter
+- **Memory**: 512mb
+- **CPU**: 1
+- **Request Timeout**: 300s
+- **Maximum Concurrent Instances**: 80
+- **Minimum Number Of Instances**: 0
+- **Maximum Number Of Instances**: 100
+
+### API
+- **Memory**: 512mb
+- **CPU**: 1
+- **Request Timeout**: 300s
+- **Maximum Concurrent Instances**: 80
+- **Minimum Number Of Instances**: 0
+- **Maximum Number Of Instances**: 100
+
+### Web App
+- **Memory**: 512mb
+- **CPU**: 1
+- **Request Timeout**: 300s
+- **Maximum Concurrent Instances**: 80
+- **Minimum Number Of Instances**: 0
+- **Maximum Number Of Instances**: 100
+
