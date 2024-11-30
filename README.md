@@ -44,34 +44,33 @@ AWS_S3_ENDPOINT = <string>
 
 CORS_ALLOWED_ORIGINS = <string>
 
-DB_CLUSTER = <string>
-DB_NAME = <string>
-DB_PASSWORD = <string>
-DB_USERNAME = <string>
-
-# Alternatively we can use the url format for the database directly
 DB_URL = <string>
 
-# Optional
+# URL for documinter
+DOCUMINT_RENDER_SERVICE_URL = <string>
+
+# Optional for admin accounts
 DOCUMINT_ROOT_ACCOUNT_IDS = <string>
 DOCUMINT_SOURCE_ACCOUNT_ID = <string>
 
+# Optional for emails such as login confirmations and password resets
 SENDGRID_API_KEY = <string>
 SENDGRID_FROM_EMAIL = <string>
 SENDGRID_USER_LIST_ID = <string>
 
-SENTRY_DSN = <string>
-
 # if this variable is not present the registration will be allowed captchaless
 RE_CAPTCHA_SECRET = <string>
 
-DOCUMINT_LICENCE_KER = <string>
+DOCUMINT_LICENSE_KEY = <string>
 ```
 
 Web app
 ```
-REACT_APP_API_URL = https://staging.api.documint.me/1
-REACT_APP_BASE_URL = http://localhost:3000
+REACT_APP_API_URL = <string>
+REACT_APP_BASE_URL = <string>
+
+# if this variable is not present the registration will be allowed captchaless required if present on API
+REACT_APP_RE_CAPTCHA_KEY = <string>
 ```
 
 
@@ -97,15 +96,15 @@ services:
       - "8080:8080" # Expose port 8080 for the web service
 
   # API Service
-  documint_api:
+  api:
     image: us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:alpine
-    container_name: documint_api
+    container_name: api
     depends_on:
       - mongodb
       - documinter
     environment:
       - DB_URL=mongodb://mongodb:27017/documintdb # MongoDB URL
-      - DOCUMINTER_URL=http://documinter:8080           # Web service URL
+      - DOCUMINT_RENDER_SERVICE_URL=http://documinter:8080           # Render service URL
     ports:
       - "5000:5000" # Expose port 5000 for the API
 
@@ -123,9 +122,10 @@ services:
     image: us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:alpine
     container_name: web_app
     depends_on:
-      - documint_api
+      - api
     environment:
-      - API_URL=http://documint_api:5000 # API URL
+      - REACT_APP_API_URL=http://api:5000 # API URL
+      - REACT_APP_BASE_UR=http://web_app:3000
     ports:
       - "3000:3000" # Expose port 3000 for the frontend app
 
