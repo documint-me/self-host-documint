@@ -78,7 +78,7 @@ After pulling you can run each image using the docker run command or with docker
 
 Example docker run
 ```
-docker run -d -p 8080:80 --name documinter us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:alpine
+docker run -d -p 8080:80 --name documint-api us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:alpine
 ```
 
 Example docker compose
@@ -88,7 +88,7 @@ version: '3.9'
 services:
   # Web Service
   documinter:
-    image: documinter us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:alpine
+    image: us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:alpine
     container_name: documinter
     ports:
       - "8080:8080" # Expose port 8080 for the web service
