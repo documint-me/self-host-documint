@@ -21,6 +21,13 @@ gcloud config set project documint-app
 gcloud auth configure-docker
 ```
 
+For setup with service account download service key file and specify [KEY_FILE_PATH] which points to the service key file
+```
+gcloud auth activate-service-account --key-file=[KEY_FILE_PATH]
+gcloud config set project documint-app
+gcloud auth configure-docker
+```
+
 Pull images
 ```
 docker pull us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:alpine
