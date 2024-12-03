@@ -18,14 +18,14 @@ Setup `gcloud`
 ```
 gcloud auth login
 gcloud config set project documint-app
-gcloud auth configure-docker
+gcloud auth configure-docker us-central1-docker.pkg.dev
 ```
 
 For setup with service account download service key file and specify [KEY_FILE_PATH] which points to the service key file
 ```
 gcloud auth activate-service-account --key-file=[KEY_FILE_PATH]
 gcloud config set project documint-app
-gcloud auth configure-docker
+gcloud auth configure-docker us-central1-docker.pkg.dev
 ```
 
 Pull images
