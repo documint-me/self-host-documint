@@ -95,8 +95,10 @@ version: '3.9'
 services:
   # Web Service
   documinter:
-    image: us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:alpine
+    image: us-central1-docker.pkg.dev/documint-app/documinter-pkg/documinter:sharp
     container_name: documinter
+    environment:
+      - PORT=8080
     ports:
       - "8080:8080" # Expose port 8080 for the web service
 
@@ -109,9 +111,10 @@ services:
       - documinter
     environment:
       - DB_URL=mongodb://mongodb:27017/documintdb # MongoDB URL
-      - DOCUMINT_RENDER_SERVICE_URL=http://documinter:8080           # Render service URL
+      - DOCUMINT_RENDER_SERVICE_URL=http://documinter:8080 # Render service URL
+      - PORT=5001
     ports:
-      - "5000:5000" # Expose port 5000 for the API
+      - "5001:5001" # Expose port 5000 for the API
 
   # MongoDB Database
   mongodb:
@@ -131,6 +134,7 @@ services:
     environment:
       - REACT_APP_API_URL=http://api:5000 # API URL
       - REACT_APP_BASE_UR=http://web_app:3000
+      - PORT=3000
     ports:
       - "3000:3000" # Expose port 3000 for the frontend app
 
