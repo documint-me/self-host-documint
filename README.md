@@ -97,6 +97,10 @@ services:
   documinter:
     image: us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:alpine
     container_name: documinter
+    depends_on:
+      - mongodb
+    environment:
+      - DB_URL=mongodb://mongodb:27017/documintdb # MongoDB URL
     ports:
       - "8080:8080" # Expose port 8080 for the web service
 
