@@ -116,7 +116,7 @@ services:
       - documinter
     environment:
       - DB_URL=mongodb://mongodb:27017/documintdb?retryWrites=true&w=majority # MongoDB URL
-      - DOCUMINT_RENDER_SERVICE_URL=http://documinter:8080 # Render service URL
+      - DOCUMINT_RENDER_SERVICE_URL=http://documinter:8080/api/1/render # Render service URL
       - PORT=5001
       - AUTH_API_KEY_SECRET=carbon
       - SESSION_SECRET=DIOXIDE
