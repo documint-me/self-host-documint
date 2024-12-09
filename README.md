@@ -121,7 +121,7 @@ services:
       - AUTH_API_KEY_SECRET=carbon
       - SESSION_SECRET=DIOXIDE
       - CORS_ALLOWED_ORIGINS=*;http://web_app:3000; http://localhost:3000
-      - DOCUMINT_LICENSE_KEY=Y765MjDEEr2xJjzFIJsb
+      - DOCUMINT_LICENSE_KEY=Y765MjDEEr2xJjzFIJsb # Use a valid license key
       - FORCE_HTTPS=false
       - SESSION_COOKIE_SECURE=false
       - SESSION_COOKIE_SAME_SITE=lax
