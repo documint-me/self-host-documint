@@ -133,7 +133,7 @@ services:
       - api
     environment:
       - REACT_APP_API_URL=http://api:5000 # API URL
-      - REACT_APP_BASE_UR=http://web_app:3000
+      - REACT_APP_BASE_URL=http://web_app:3000
       - PORT=3000
     ports:
       - "3000:3000" # Expose port 3000 for the frontend app
