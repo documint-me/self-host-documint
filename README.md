@@ -69,6 +69,11 @@ SENDGRID_USER_LIST_ID = <string>
 RE_CAPTCHA_SECRET = <string>
 
 DOCUMINT_LICENSE_KEY = <string>
+
+# these are specific to dev enviroments i.e without https
+FORCE_HTTPS=false
+SESSION_COOKIE_SECURE=false
+SESSION_COOKIE_SAME_SITE=lax
 ```
 
 Web app
@@ -110,9 +115,16 @@ services:
       - mongodb
       - documinter
     environment:
-      - DB_URL=mongodb://mongodb:27017/documintdb # MongoDB URL
+      - DB_URL=mongodb://mongodb:27017/documintdb?retryWrites=true&w=majority # MongoDB URL
       - DOCUMINT_RENDER_SERVICE_URL=http://documinter:8080 # Render service URL
       - PORT=5001
+      - AUTH_API_KEY_SECRET=carbon
+      - SESSION_SECRET=DIOXIDE
+      - CORS_ALLOWED_ORIGINS=*;http://web_app:3000; http://localhost:3000
+      - DOCUMINT_LICENSE_KEY=Y765MjDEEr2xJjzFIJsb
+      - FORCE_HTTPS=false
+      - SESSION_COOKIE_SECURE=false
+      - SESSION_COOKIE_SAME_SITE=lax
     ports:
       - "5001:5001" # Expose port 5000 for the API
 
@@ -132,8 +144,8 @@ services:
     depends_on:
       - api
     environment:
-      - REACT_APP_API_URL=http://api:5000 # API URL
-      - REACT_APP_BASE_UR=http://web_app:3000
+      - REACT_APP_API_URL=http://localhost:5001/1 # API URL
+      - REACT_APP_BASE_URL=http://localhost:3000
       - PORT=3000
     ports:
       - "3000:3000" # Expose port 3000 for the frontend app
