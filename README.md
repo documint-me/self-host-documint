@@ -35,25 +35,26 @@ docker pull us-central1-docker.pkg.dev/documint-app/documinter-pkg/documinter:sh
 docker pull us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:alpine
 ```
 
-**Note** - Tags will change with each version
+> **Note** - Tags will change with each version
 
 ### Enviroment variables
 API
 ```
-AUTH_API_KEY_SECRET = <string>
+# Required
+API_KEY_SECRET = <string>
 SESSION_SECRET = <string>
 
-AWS_S3_BUCKET_NAME = <string>
-AWS_ACCESS_KEY_ID = <string>
-AWS_SECRET_ACCESS_KEY = <string>
-AWS_DEFAULT_REGION = <string>
-AWS_S3_ENDPOINT = <string>
+STORAGE_AWS_BUCKET_NAME = <string>
+STORAGE_AWS_ACCESS_KEY_ID = <string>
+STORAGE_AWS_SECRET_ACCESS_KEY = <string>
 
 CORS_ALLOWED_ORIGINS = <string>
 
 DB_URL = <string>
 
-# URL for documinter
+DOCUMINT_LICENSE_KEY = <string>
+
+# URL for documinter(required)
 DOCUMINT_RENDER_SERVICE_URL = <string>
 
 # Optional for admin accounts
@@ -68,8 +69,6 @@ SENDGRID_USER_LIST_ID = <string>
 # if this variable is not present the registration will be allowed captchaless
 RE_CAPTCHA_SECRET = <string>
 
-DOCUMINT_LICENSE_KEY = <string>
-
 # these are specific to dev enviroments i.e without https
 FORCE_HTTPS=false
 SESSION_COOKIE_SECURE=false
@@ -78,11 +77,13 @@ SESSION_COOKIE_SAME_SITE=lax
 
 Web app
 ```
-REACT_APP_API_URL = <string>
-REACT_APP_BASE_URL = <string>
+VITE_API_URL = <string
 
 # if this variable is not present the registration will be allowed captchaless required if present on API
-REACT_APP_RE_CAPTCHA_KEY = <string>
+VITE_RE_CAPTCHA_KEY = <string>
+
+# if this variable is not present the google fonts plugin will be disabled
+VITE_GOOGLE_FONTS_API_KEY = <string>
 ```
 
 ### Run
