@@ -30,9 +30,9 @@ gcloud auth configure-docker us-central1-docker.pkg.dev
 
 Pull images
 ```
-docker pull us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:alpine
-docker pull us-central1-docker.pkg.dev/documint-app/documinter-pkg/documinter:sharp
-docker pull us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:alpine
+docker pull us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:eec5d19
+docker pull us-central1-docker.pkg.dev/documint-app/documinter-pkg/documinter:c7a34d2
+docker pull us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:eec5d19
 ```
 
 > **Note** - Tags will change with each version
@@ -77,7 +77,7 @@ SESSION_COOKIE_SAME_SITE=lax
 
 Web app
 ```
-VITE_API_URL = <string
+VITE_API_URL = <string>
 
 # if this variable is not present the registration will be allowed captchaless required if present on API
 VITE_RE_CAPTCHA_KEY = <string>
@@ -101,7 +101,7 @@ version: '3.9'
 services:
   # Web Service
   documinter:
-    image: us-central1-docker.pkg.dev/documint-app/documinter-pkg/documinter:sharp
+    image: us-central1-docker.pkg.dev/documint-app/documinter-pkg/documinter:c7a34d2
     container_name: documinter
     environment:
       - PORT=8080
@@ -110,7 +110,7 @@ services:
 
   # API Service
   api:
-    image: us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:alpine
+    image: us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:eec5d19
     container_name: api
     depends_on:
       - mongodb
@@ -119,10 +119,13 @@ services:
       - DB_URL=mongodb://mongodb:27017/documintdb?retryWrites=true&w=majority # MongoDB URL
       - DOCUMINT_RENDER_SERVICE_URL=http://documinter:8080/api/1/render # Render service URL
       - PORT=5001
-      - AUTH_API_KEY_SECRET=carbon
+      - API_KEY_SECRET=carbon
       - SESSION_SECRET=DIOXIDE
       - CORS_ALLOWED_ORIGINS=*;http://web_app:3000; http://localhost:3000
       - DOCUMINT_LICENSE_KEY=Y765MjDEEr2xJjzFIJsb # Use a valid license key
+      - STORAGE_AWS_BUCKET_NAME=bucket-name 
+      - STORAGE_AWS_ACCESS_KEY_ID=id
+      - STORAGE_AWS_SECRET_ACCESS_KEY=access-key
       - FORCE_HTTPS=false
       - SESSION_COOKIE_SECURE=false
       - SESSION_COOKIE_SAME_SITE=lax
@@ -140,7 +143,7 @@ services:
 
   # Frontend Web App
   web_app:
-    image: us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:alpine
+    image: us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:eec5d19
     container_name: web_app
     depends_on:
       - api
