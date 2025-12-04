@@ -49,6 +49,7 @@ STORAGE_AWS_ACCESS_KEY_ID = <string>
 STORAGE_AWS_SECRET_ACCESS_KEY = <string>
 
 CORS_ALLOWED_ORIGINS = <string>
+CLIENT_URL = <string>
 
 DB_URL = <string>
 
