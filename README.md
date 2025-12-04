@@ -62,9 +62,7 @@ DOCUMINT_ROOT_ACCOUNT_IDS = <string>
 DOCUMINT_SOURCE_ACCOUNT_ID = <string>
 
 # Optional for emails such as login confirmations and password resets
-SENDGRID_API_KEY = <string>
-SENDGRID_FROM_EMAIL = <string>
-SENDGRID_USER_LIST_ID = <string>
+SENDGRID_API_KEY = <string
 
 # if this variable is not present the registration will be allowed captchaless
 RE_CAPTCHA_SECRET = <string>
