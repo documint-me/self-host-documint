@@ -30,9 +30,9 @@ gcloud auth configure-docker us-central1-docker.pkg.dev
 
 Pull images
 ```
-docker pull us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:1bcf0bc
+docker pull us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:77dd9c5
 docker pull us-central1-docker.pkg.dev/documint-app/documinter-pkg/documinter:c7a34d2
-docker pull us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:1bcf0bc
+docker pull us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:77dd9c5
 ```
 
 > **Note** - Tags will change with each version
@@ -63,7 +63,9 @@ DOCUMINT_ROOT_ACCOUNT_IDS = <string>
 DOCUMINT_SOURCE_ACCOUNT_ID = <string>
 
 # Optional for emails such as login confirmations and password resets
-SENDGRID_API_KEY = <string
+SENDGRID_API_KEY = <string>
+SENDGRID_FROM_EMAIL = <string>
+SENDGRID_USER_LIST_ID = <string>
 
 # if this variable is not present the registration will be allowed captchaless
 RE_CAPTCHA_SECRET = <string>
@@ -109,7 +111,7 @@ services:
 
   # API Service
   api:
-    image: us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:1bcf0bc
+    image: us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:77dd9c5
     container_name: api
     depends_on:
       - mongodb
@@ -142,7 +144,7 @@ services:
 
   # Frontend Web App
   web_app:
-    image: us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:1bcf0bc
+    image: us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:77dd9c5
     container_name: web_app
     depends_on:
       - api
