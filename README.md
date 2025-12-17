@@ -44,9 +44,10 @@ API
 API_KEY_SECRET = <string>
 SESSION_SECRET = <string>
 
-AWS_BUCKET_NAME = <string>
+AWS_S3_BUCKET_NAME = <string>
 AWS_ACCESS_KEY_ID = <string>
 AWS_SECRET_ACCESS_KEY = <string>
+AWS_DEFAULT_REGION = <string>
 
 CORS_ALLOWED_ORIGINS = <string>
 CLIENT_URL = <string>
