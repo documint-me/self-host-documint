@@ -30,9 +30,9 @@ gcloud auth configure-docker us-central1-docker.pkg.dev
 
 Pull images
 ```
-docker pull us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:77dd9c5
+docker pull us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:7475181
 docker pull us-central1-docker.pkg.dev/documint-app/documinter-pkg/documinter:c7a34d2
-docker pull us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:77dd9c5
+docker pull us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:7475181
 ```
 
 > **Note** - Tags will change with each version
@@ -111,7 +111,7 @@ services:
 
   # API Service
   api:
-    image: us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:77dd9c5
+    image: us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:7475181
     container_name: api
     depends_on:
       - mongodb
@@ -144,7 +144,7 @@ services:
 
   # Frontend Web App
   web_app:
-    image: us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:77dd9c5
+    image: us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:7475181
     container_name: web_app
     depends_on:
       - api
@@ -158,6 +158,62 @@ volumes:
   mongodb_data:
 ```
 
+## Indexes
+> Field order matters
+______________________
+### documents Collection
+
+#### `dataHash_1_templateHash_1_expiresAt_1`
+
+**Fields**
+- `dataHash` → Ascending (1)
+- `templateHash` → Ascending (1)
+- `expiresAt` → Ascending (1)
+
+#### `account_1_isLive_1_createdAt_1`
+
+**Fields**
+- `account` → Ascending (1)
+- `isLive` → Ascending (1)
+- `createdAt` → Ascending (1)
+
+#### `account_1_createdAt_1`
+
+**Fields**
+- `account` → Ascending (1)
+- `createdAt` → Ascending (1)
+
+______________________
+### templates Collection
+
+#### `account_1_updatedAt_-1_isTrashed_1_isActive_1`
+
+**Fields**
+- `account` → Ascending (1)
+- `updatedAt` → Descending (-1)
+- `isTrashed` → Ascending (1)
+- `isActive` → Ascending (1)
+
+#### `account_1_folder_1_updatedAt_-1`
+
+**Fields**
+- `account` → Ascending (1)
+- `folder` → Ascending (1)
+- `updatedAt` → Descending (-1)
+
+#### `account_1_updatedAt_1`
+
+**Fields**
+- `account` → Ascending (1)
+- `updatedAt` → Ascending (1)
+
+______________________
+### `apiapps` Collection
+
+#### `key_1`
+
+**Fields**
+- `key` → Ascending (1)
 
 ## Resource allocation and deployment
 Currently documint deploys it's services to GCP's [cloud run](https://cloud.google.com/run/docs/overview/what-is-cloud-run). The process is pushing the images to the [artifact registry](https://cloud.google.com/artifact-registry/docs/overview) then selecting the image when deploying a cloud run service, adding the enviroment variables and allocating resources through GCP's online console. These are settings documint is using in production on GCP's cloud run.
