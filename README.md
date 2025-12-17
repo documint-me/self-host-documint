@@ -30,9 +30,9 @@ gcloud auth configure-docker us-central1-docker.pkg.dev
 
 Pull images
 ```
-docker pull us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:eec5d19
+docker pull us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:1bcf0bc
 docker pull us-central1-docker.pkg.dev/documint-app/documinter-pkg/documinter:c7a34d2
-docker pull us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:eec5d19
+docker pull us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:1bcf0bc
 ```
 
 > **Note** - Tags will change with each version
@@ -44,9 +44,9 @@ API
 API_KEY_SECRET = <string>
 SESSION_SECRET = <string>
 
-STORAGE_AWS_BUCKET_NAME = <string>
-STORAGE_AWS_ACCESS_KEY_ID = <string>
-STORAGE_AWS_SECRET_ACCESS_KEY = <string>
+AWS_BUCKET_NAME = <string>
+AWS_ACCESS_KEY_ID = <string>
+AWS_SECRET_ACCESS_KEY = <string>
 
 CORS_ALLOWED_ORIGINS = <string>
 CLIENT_URL = <string>
@@ -109,7 +109,7 @@ services:
 
   # API Service
   api:
-    image: us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:eec5d19
+    image: us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:1bcf0bc
     container_name: api
     depends_on:
       - mongodb
@@ -122,9 +122,9 @@ services:
       - SESSION_SECRET=DIOXIDE
       - CORS_ALLOWED_ORIGINS=*;http://web_app:3000; http://localhost:3000
       - DOCUMINT_LICENSE_KEY=Y765MjDEEr2xJjzFIJsb # Use a valid license key
-      - STORAGE_AWS_BUCKET_NAME=bucket-name 
-      - STORAGE_AWS_ACCESS_KEY_ID=id
-      - STORAGE_AWS_SECRET_ACCESS_KEY=access-key
+      - AWS_BUCKET_NAME=bucket-name 
+      - AWS_ACCESS_KEY_ID=id
+      - AWS_SECRET_ACCESS_KEY=access-key
       - FORCE_HTTPS=false
       - SESSION_COOKIE_SECURE=false
       - SESSION_COOKIE_SAME_SITE=lax
@@ -142,13 +142,12 @@ services:
 
   # Frontend Web App
   web_app:
-    image: us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:eec5d19
+    image: us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:1bcf0bc
     container_name: web_app
     depends_on:
       - api
     environment:
-      - REACT_APP_API_URL=http://localhost:5001/1 # API URL
-      - REACT_APP_BASE_URL=http://localhost:3000
+      - VITE_API_URL=http://localhost:5001/1 # API URL
       - PORT=3000
     ports:
       - "3000:3000" # Expose port 3000 for the frontend app
