@@ -30,9 +30,9 @@ gcloud auth configure-docker us-central1-docker.pkg.dev
 
 Pull images
 ```
-docker pull us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:95ed4ed
+docker pull us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:425ef66
 docker pull us-central1-docker.pkg.dev/documint-app/documinter-pkg/documinter:c7a34d2
-docker pull us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:95ed4ed
+docker pull us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:425ef66
 ```
 
 > **Note** - Tags will change with each version
@@ -112,7 +112,7 @@ services:
 
   # API Service
   api:
-    image: us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:95ed4ed
+    image: us-central1-docker.pkg.dev/documint-app/api-pkg/documint-api:425ef66
     container_name: api
     depends_on:
       - mongodb
@@ -145,7 +145,7 @@ services:
 
   # Frontend Web App
   web_app:
-    image: us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:95ed4ed
+    image: us-central1-docker.pkg.dev/documint-app/web-app-pkg/documint-web-app:425ef66
     container_name: web_app
     depends_on:
       - api
