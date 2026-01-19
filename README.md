@@ -60,8 +60,8 @@ DOCUMINT_LICENSE_KEY = <string>
 DOCUMINT_RENDER_SERVICE_URL = <string>
 
 # Optional for admin accounts
-DOCUMINT_ROOT_ACCOUNT_IDS = <string>
-DOCUMINT_SOURCE_ACCOUNT_ID = <string>
+ROOT_ACCOUNT_IDS = <string>
+SOURCE_ACCOUNT_ID = <string>
 
 # Optional for emails such as login confirmations and password resets
 SENDGRID_API_KEY = <string>
